@@ -1,0 +1,48 @@
+/*
+ *    Theme Name:     Yoko Child One Sidebar Only
+ *    Theme URI:      http://kau-boys.de
+ *    Description:    Child Theme for the Yoko theme
+ *    Author:         Bernhard Kau
+ *    Author URI:     http://kau-boys.de
+ *    Template:       yoko
+ *    Version:        1.1
+ */
+
+#content {
+	width: 90%;
+}
+
+.entry-content p a, .entry-summary p a, #tertiary .textwidget a, #comments .comment-text a, #comments ol li.pingback a.url {
+	text-decoration: underline;
+}
+
+aside.widget.widget_text_highlighted {
+	background-color: #eee;
+	padding: 20px;
+}
+
+.widget h3.widget-title {
+	text-transform: none;
+}
+
+/*
+ * A11y for the navigation
+ *
+ * @see: https://kau-boys.com/2358/web-development/a-few-easy-steps-to-make-a-navigation-more-accessible
+ */
+#branding #mainnav ul ul {
+	display: block;
+	opacity: 1;
+}
+
+#branding #mainnav ul li:not(.focus):not(:hover) > ul {
+	position: absolute;
+	left: -999em !important;
+	opacity: 0 !important;
+}
+
+#branding #mainnav ul li a:focus,
+#branding #mainnav ul li a.focus {
+	background: #F0F0F0;
+	color: #999;
+}
