@@ -70,3 +70,50 @@ class WP_Widget_Text_Highlighted extends WP_Widget {
 	}
 }
 register_widget( 'WP_Widget_Text_Highlighted' );
+
+function yoko_comment( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment;
+	switch ( $comment->comment_type ) :
+		case '' :
+		case 'comment' :
+			?>
+			<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+			<div id="comment-<?php comment_ID(); ?>">
+				<div class="comment-gravatar"><?php echo get_avatar( $comment, 65 ); ?></div>
+
+				<div class="comment-body">
+					<div class="comment-meta commentmetadata">
+						<?php printf( __( '%s', 'yoko' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?><br/>
+						<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+							<?php
+							/* translators: 1: date, 2: time */
+							printf( __( '%1$s at %2$s', 'yoko' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( 'Edit &rarr;', 'yoko' ), ' ' );
+						?>
+					</div><!-- .comment-meta .commentmetadata -->
+
+					<?php comment_text(); ?>
+
+					<?php if ( $comment->comment_approved == '0' ) : ?>
+						<p class="moderation"><?php _e( 'Your comment is awaiting moderation.', 'yoko' ); ?></p>
+					<?php endif; ?>
+
+					<div class="reply">
+						<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+					</div><!-- .reply -->
+
+				</div>
+				<!--comment Body-->
+
+			</div><!-- #comment-##  -->
+
+			<?php
+			break;
+		case 'pingback'  :
+		case 'trackback' :
+			?>
+			<li class="post pingback">
+			<p><?php _e( 'Pingback:', 'yoko' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'yoko'), ' ' ); ?></p>
+			<?php
+			break;
+	endswitch;
+}
