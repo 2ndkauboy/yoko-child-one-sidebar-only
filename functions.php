@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @package WordPress
  * @subpackage Yoko Child One Sidebar Only
@@ -9,7 +8,7 @@ function yoko_child_one_sidebar_only_unregister_sidebar() {
 	unregister_sidebar( 'sidebar-2' );
 }
 add_action( 'init', 'yoko_child_one_sidebar_only_unregister_sidebar' );
- 
+
 function yoko_child_one_sidebar_only_enqueue_style() {
 	wp_enqueue_style(
 		'yoko-style',
@@ -43,7 +42,7 @@ add_action( 'after_setup_theme', 'yoko_child_one_sidebar_only_footer_menu_setup'
 
 
 class WP_Widget_Text_Highlighted extends WP_Widget {
-	
+
 	function __construct() {
 		$widget_ops = array( 'classname' => 'widget_text widget_text_highlighted', 'description' => __( 'Arbitrary text or HTML.' ) );
 		$control_ops = array( 'width' => 400, 'height' => 350 );
@@ -74,15 +73,15 @@ class WP_Widget_Text_Highlighted extends WP_Widget {
 
 	function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '' ) );
-		$title = strip_tags($instance['title']);
-		$text = esc_textarea($instance['text']);
+		$title = strip_tags( $instance['title'] );
+		$text  = esc_textarea( $instance['text'] );
 ?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
+		<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:' ); ?></label>
+		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
 
-		<textarea class="widefat" rows="16" cols="20" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
+		<textarea class="widefat" rows="16" cols="20" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>"><?php echo $text; ?></textarea>
 
-		<p><input id="<?php echo $this->get_field_id('filter'); ?>" name="<?php echo $this->get_field_name('filter'); ?>" type="checkbox" <?php checked(isset($instance['filter']) ? $instance['filter'] : 0); ?> />&nbsp;<label for="<?php echo $this->get_field_id('filter'); ?>"><?php _e('Automatically add paragraphs'); ?></label></p>
+		<p><input id="<?php echo esc_attr( $this->get_field_id( 'filter' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'filter' ) ); ?>" type="checkbox" <?php checked( isset( $instance['filter'] ) ? $instance['filter'] : 0); ?> />&nbsp;<label for="<?php echo esc_attr( $this->get_field_id( 'filter' ) ); ?>"><?php esc_html_e( 'Automatically add paragraphs' ); ?></label></p>
 <?php
 	}
 }
@@ -100,18 +99,18 @@ function yoko_comment( $comment, $args, $depth ) {
 
 				<div class="comment-body">
 					<div class="comment-meta commentmetadata">
-						<?php printf( __( '%s', 'yoko' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?><br/>
+						<?php printf( esc_html__( '%s', 'yoko' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?><br/>
 						<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
 							<?php
 							/* translators: 1: date, 2: time */
-							printf( __( '%1$s at %2$s', 'yoko' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( 'Edit &rarr;', 'yoko' ), ' ' );
+							printf( esc_html__( '%1$s at %2$s', 'yoko' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( esc_html__( 'Edit &rarr;', 'yoko' ), ' ' );
 						?>
 					</div><!-- .comment-meta .commentmetadata -->
 
 					<?php comment_text(); ?>
 
 					<?php if ( $comment->comment_approved == '0' ) : ?>
-						<p class="moderation"><?php _e( 'Your comment is awaiting moderation.', 'yoko' ); ?></p>
+						<p class="moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'yoko' ); ?></p>
 					<?php endif; ?>
 
 					<div class="reply">
@@ -129,7 +128,7 @@ function yoko_comment( $comment, $args, $depth ) {
 		case 'trackback' :
 			?>
 			<li class="post pingback">
-			<p><?php _e( 'Pingback:', 'yoko' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'yoko'), ' ' ); ?></p>
+			<p><?php esc_html_e( 'Pingback:', 'yoko' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', 'yoko'), ' ' ); ?></p>
 			<?php
 			break;
 	endswitch;
