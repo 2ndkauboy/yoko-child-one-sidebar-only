@@ -11,9 +11,26 @@ function yoko_child_one_sidebar_only_unregister_sidebar() {
 add_action( 'init', 'yoko_child_one_sidebar_only_unregister_sidebar' );
  
 function yoko_child_one_sidebar_only_enqueue_style() {
-	wp_enqueue_style( 'yoko-style', get_template_directory_uri() . '/style.css' );
-	wp_enqueue_style( 'yoko-child-one-sidebar-only-styles', get_stylesheet_directory_uri() . '/style.css', array( 'yoko-style' ), '1.1' );
-	wp_enqueue_script( 'yoko-navigation', get_stylesheet_directory_uri() . '/js/navigation.js', array(), '1.1', true );
+	wp_enqueue_style(
+		'yoko-style',
+		get_template_directory_uri() . '/style.css',
+        null,
+		gmdate( 'YmdHi', filemtime( get_template_directory() . '/style.css' ) )
+
+	);
+	wp_enqueue_style(
+		'yoko-child-one-sidebar-only-styles',
+		get_stylesheet_directory_uri() . '/style.css',
+		array( 'yoko-style' ),
+		gmdate( 'YmdHi', filemtime( get_stylesheet_directory() . '/style.css' ) )
+	);
+	wp_enqueue_script(
+		'yoko-navigation',
+		get_stylesheet_directory_uri() . '/js/navigation.js',
+		array(),
+		gmdate( 'YmdHi', filemtime( get_stylesheet_directory() . '/style.css' ) ),
+		true
+	);
 }
 add_action( 'wp_enqueue_scripts', 'yoko_child_one_sidebar_only_enqueue_style' );
 
