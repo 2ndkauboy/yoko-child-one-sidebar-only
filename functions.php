@@ -18,9 +18,21 @@ function yoko_child_one_sidebar_only_enqueue_style() {
 
 	);
 	wp_enqueue_style(
+		'yoko-child-one-sidebar-only-fonts',
+		get_stylesheet_directory_uri() . '/fonts.css',
+		array(),
+		gmdate( 'YmdHi', filemtime( get_stylesheet_directory() . '/fonts.css' ) )
+	);
+	wp_enqueue_style(
+		'yoko-child-one-sidebar-only-style-fonts',
+		get_stylesheet_directory_uri() . '/style-fonts.css',
+		array(),
+		gmdate( 'YmdHi', filemtime( get_stylesheet_directory() . '/style-fonts.css' ) )
+	);
+	wp_enqueue_style(
 		'yoko-child-one-sidebar-only-styles',
 		get_stylesheet_directory_uri() . '/style.css',
-		array( 'yoko-style' ),
+		array( 'yoko-child-one-sidebar-only-fonts', 'yoko-child-one-sidebar-only-style-fonts', 'yoko-style' ),
 		gmdate( 'YmdHi', filemtime( get_stylesheet_directory() . '/style.css' ) )
 	);
 	wp_enqueue_script(
@@ -32,6 +44,11 @@ function yoko_child_one_sidebar_only_enqueue_style() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'yoko_child_one_sidebar_only_enqueue_style' );
+
+function yoko_child_one_sidebar_only_dequeue_scripts() {
+	wp_dequeue_style( 'yoko-fonts') ;
+}
+add_action( 'wp_enqueue_scripts', 'yoko_child_one_sidebar_only_dequeue_scripts', 11 );
 
 function yoko_child_one_sidebar_only_footer_menu_setup() {
     register_nav_menus( array(

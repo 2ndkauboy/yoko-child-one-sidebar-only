@@ -1,0 +1,35 @@
+body,
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6,
+#content .entry-header h2.entry-title,
+#content .entry-details p span.entry-date, #content .entry-details p a,
+#content .entry-meta a,
+#content blockquote cite,
+#content .post p.wp-caption-text,
+#content .single-entry-header h1.entry-title,
+#content .post .single-entry-meta p a,
+#content .post .author-info h3,
+form#commentform textarea#comment,
+#content .entry-post-format .entry-header p a,
+#content .page-entry-header h1.entry-title,
+#content .wpcf7 textarea {
+	font-family: 'Noto Sans', arial, sans-serif;
+}
+
+#site-title h2,
+#content .entry-details,
+#content .entry-meta p,
+#content p em,
+#content em,
+#content .post blockquote, #content .page blockquote,
+#content .single-entry-header p span.entry-date, #content .single-entry-header p span.entry-author,
+#content .post .single-entry-meta p,
+#comments p.moderation,
+#content .entry-post-format .entry-header p,
+.widget_calendar #wp-calendar caption {
+	font-family: 'Noto Serif', Times, serif;
+}
